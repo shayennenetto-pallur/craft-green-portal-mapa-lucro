@@ -1,39 +1,42 @@
 # Mapa do L.U.C.R.O. — Craft Green
 
-Portal de gestão estratégica com 6 sistemas de IA para empresas.
+Portal de gestão estratégica com 6 sistemas de IA para o framework L.U.C.R.O.
 
-## Instalação
+## Stack
+
+- React 19 + Vite 5 · CSS puro · API Anthropic · Deploy Vercel
+
+## Instalação local
 
 ```bash
+git clone https://github.com/shayennenetto-pallur/craft-green-portal-mapa-lucro.git
+cd craft-green-portal-mapa-lucro
 npm install
 npm run dev
 ```
 
-## Adicionar Logo
-
-Coloque o arquivo SVG da Craft Green em `src/assets/logo.svg`.
+Acesse em `http://localhost:5173` e insira sua API Key Anthropic no campo superior direito.
 
 ## Deploy na Vercel
 
-1. Faça push para um repositório GitHub
-2. Importe o projeto na [Vercel](https://vercel.com)
-3. Configure o framework como **Vite**
-4. Clique em Deploy
+O repositório já está conectado — qualquer `git push origin main` dispara deploy automático.
 
-## Uso
-
-1. Acesse o portal em `http://localhost:5173`
-2. Insira sua API Key Anthropic no campo superior direito
-3. Navegue pelos 6 sistemas no menu lateral
-4. Preencha os campos e clique em "Gerar" para obter a análise da IA
+Para reimportar manualmente:
+1. [vercel.com/new](https://vercel.com/new) → Import `craft-green-portal-mapa-lucro`
+2. Framework: **Vite** (detectado automaticamente)
+3. Clique em **Deploy**
 
 ## Sistemas
 
-| Pilar | Sistema |
-|-------|---------|
-| L | Análise de Time — Nine Box + PDI |
-| L | Farol do L.U.C.R.O. — Diagnóstico dos 5 pilares |
-| U | Central de Inteligência — Mapeamento de processos |
-| C | A Única Coisa Incopiável — Manual de Cultura |
-| R | Calendário de Rituais — Pautas + Atas |
-| O | Onboarding Financeiro — DRE + Fluxo de Caixa |
+| Pilar | Sistema | O que faz |
+|-------|---------|-----------|
+| L | Análise de Time | Nine Box + Feedback 1:1 + PDI com IA |
+| L | Farol do L.U.C.R.O. | Diagnóstico estratégico dos 5 pilares |
+| U | Central de Inteligência | Mapeamento de processos e MDTs |
+| C | A Única Coisa Incopiável | Chat guiado → Manual de Cultura |
+| R | Calendário de Rituais | Pautas + Atas automáticas |
+| O | Onboarding Financeiro | DRE + Fluxo de Caixa + Ações |
+
+## Logo
+
+`src/assets/logo.svg` — substitua pelo SVG oficial da Craft Green (branco, fundo transparente).
