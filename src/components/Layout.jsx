@@ -83,8 +83,6 @@ export default function Layout() {
         <ActiveComponent apiKey={apiKey} />
       </main>
 
-      {/* WATERMARK */}
-      <div className="craft-watermark">craft</div>
     </>
   );
 }
