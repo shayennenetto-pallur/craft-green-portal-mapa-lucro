@@ -71,18 +71,19 @@ function RatingButton({ value, selected, onClick }) {
       style={{
         background: c.bg,
         color: c.text,
-        opacity: selected ? 1 : 0.35,
-        transform: selected ? 'scale(1.12)' : 'scale(1)',
-        border: 'none',
+        opacity: selected ? 1 : 0.6,
+        transform: selected ? 'scale(1.15)' : 'scale(1)',
+        border: selected ? `2px solid ${c.text}` : '2px solid transparent',
         borderRadius: 6,
-        width: 36,
-        height: 36,
+        width: 38,
+        height: 38,
         fontWeight: 700,
         fontSize: 13,
         cursor: 'pointer',
-        transition: 'opacity 0.15s, transform 0.15s',
+        transition: 'opacity 0.15s, transform 0.15s, border 0.15s',
         fontFamily: 'Inter, sans-serif',
         flexShrink: 0,
+        boxShadow: selected ? `0 0 8px ${c.bg}99` : 'none',
       }}
     >
       {value}
@@ -188,7 +189,7 @@ export default function AnaliseTime({ apiKey }) {
       )}
 
       {/* BLOCO 1 — FORMULÁRIO */}
-      <div className="card" style={{ marginBottom: 24 }}>
+      <div className="card" style={{ marginBottom: 24, borderColor: 'rgba(44,194,149,0.3)', background: '#0f3a36' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, marginBottom: 20 }}>
           <div className="form-group" style={{ marginBottom: 0 }}>
             <label className="form-label">Nome</label>
@@ -204,7 +205,7 @@ export default function AnaliseTime({ apiKey }) {
           </div>
         </div>
 
-        <p style={{ fontSize: 11, color: 'var(--text-soft)', marginBottom: 18, letterSpacing: '0.02em' }}>
+        <p style={{ fontSize: 11, color: 'var(--green-light)', marginBottom: 18, letterSpacing: '0.02em', opacity: 0.75 }}>
           Escala: 1 = muito ruim · 5 = muito bom
         </p>
 
@@ -222,7 +223,7 @@ export default function AnaliseTime({ apiKey }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {PERF_QUESTIONS.map((q, i) => (
                 <div key={i}>
-                  <p style={{ fontSize: 12, color: 'var(--text-soft)', marginBottom: 7, lineHeight: 1.45 }}>
+                  <p style={{ fontSize: 12, color: '#c8ead8', marginBottom: 7, lineHeight: 1.45 }}>
                     {i + 1}. {q}
                   </p>
                   <div style={{ display: 'flex', gap: 6 }}>
@@ -248,7 +249,7 @@ export default function AnaliseTime({ apiKey }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {POT_QUESTIONS.map((q, i) => (
                 <div key={i}>
-                  <p style={{ fontSize: 12, color: 'var(--text-soft)', marginBottom: 7, lineHeight: 1.45 }}>
+                  <p style={{ fontSize: 12, color: '#c8ead8', marginBottom: 7, lineHeight: 1.45 }}>
                     {i + 6}. {q}
                   </p>
                   <div style={{ display: 'flex', gap: 6 }}>
