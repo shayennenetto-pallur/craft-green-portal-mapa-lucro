@@ -110,7 +110,7 @@ function AbcBadge({ abc }) {
   );
 }
 
-export default function AnaliseTime({ apiKey }) {
+export default function AnaliseTime() {
   const [nome, setNome] = useState('');
   const [funcao, setFuncao] = useState('');
   const [remuneracao, setRemuneracao] = useState('');
@@ -181,12 +181,6 @@ export default function AnaliseTime({ apiKey }) {
         <h1 className="system-title">Análise de Time</h1>
         <p className="system-subtitle">Avalie sua equipe com Nine Box e gere Feedback 1:1 + PDI com IA.</p>
       </div>
-
-      {!apiKey && (
-        <div className="no-api-warning">
-          Insira sua <span>API Key Anthropic</span> no campo superior direito para usar a IA.
-        </div>
-      )}
 
       {/* BLOCO 1 — FORMULÁRIO */}
       <div className="card" style={{ marginBottom: 24, borderColor: 'rgba(44,194,149,0.3)', background: '#1a2420' }}>
@@ -478,21 +472,15 @@ export default function AnaliseTime({ apiKey }) {
             <button
               className="btn-primary"
               onClick={() => setShowFeedback(true)}
-              disabled={!apiKey}
             >
               Iniciar Feedback 1:1 + PDI
             </button>
-          )}
-          {!apiKey && (
-            <p style={{ fontSize: 11, color: 'var(--text-soft)', marginTop: 8 }}>
-              Insira a API Key para usar este recurso.
-            </p>
           )}
         </div>
       )}
 
       {selected && showFeedback && (
-        <FeedbackPDI colaborador={selected} apiKey={apiKey} />
+        <FeedbackPDI colaborador={selected} />
       )}
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { callClaude } from '../../utils/api';
 
-export default function CentralInteligencia({ apiKey }) {
+export default function CentralInteligencia() {
   const [form, setForm] = useState({ areas: '', processos: '', travamentos: '', time: '' });
   const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
@@ -9,7 +9,6 @@ export default function CentralInteligencia({ apiKey }) {
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async () => {
-    if (!apiKey) return alert('Insira sua API Key no campo do header.');
     setLoading(true);
     setResult('');
     const prompt = `Especialista em processos e operações digitais. Analise a empresa abaixo e gere:
@@ -24,7 +23,7 @@ Processos existentes: ${form.processos}
 Onde a empresa trava: ${form.travamentos}
 Tamanho do time: ${form.time}`;
 
-    const res = await callClaude(apiKey, prompt);
+    const res = await callClaude(prompt);
     setResult(res);
     setLoading(false);
   };
@@ -36,12 +35,6 @@ Tamanho do time: ${form.time}`;
         <h1 className="system-title">Central de Inteligência</h1>
         <p className="system-subtitle">Mapeie processos, identifique gaps e priorize MDTs.</p>
       </div>
-
-      {!apiKey && (
-        <div className="no-api-warning">
-          Insira sua <span>API Key Anthropic</span> no campo superior direito para usar a IA.
-        </div>
-      )}
 
       <div className="card" style={{ maxWidth: 640 }}>
         <div className="form-group">

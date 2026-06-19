@@ -9,7 +9,7 @@ const PILARES = [
   { letter: 'O', title: 'Orçamento', sub: 'Gestão financeira' },
 ];
 
-export default function FarolLucro({ apiKey }) {
+export default function FarolLucro() {
   const [inputs, setInputs] = useState({ L: '', U: '', C: '', R: '', O: '' });
   const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
@@ -17,7 +17,6 @@ export default function FarolLucro({ apiKey }) {
   const handleChange = (letter, val) => setInputs({ ...inputs, [letter]: val });
 
   const handleSubmit = async () => {
-    if (!apiKey) return alert('Insira sua API Key no campo do header.');
     setLoading(true);
     setResult('');
     const prompt = `Especialista no framework L.U.C.R.O. Para cada pilar abaixo, gere: STATUS (🔴🟡🟢), DIAGNÓSTICO em 2 linhas, META SMART 30 dias, AÇÃO IMEDIATA. Finalize com PRIORIDADE GERAL. Direto e estratégico.
@@ -28,7 +27,7 @@ C — Cultura: ${inputs.C}
 R — Rituais: ${inputs.R}
 O — Orçamento: ${inputs.O}`;
 
-    const res = await callClaude(apiKey, prompt);
+    const res = await callClaude(prompt);
     setResult(res);
     setLoading(false);
   };
@@ -40,12 +39,6 @@ O — Orçamento: ${inputs.O}`;
         <h1 className="system-title">Farol do L.U.C.R.O.</h1>
         <p className="system-subtitle">Diagnóstico estratégico de todos os 5 pilares da sua empresa.</p>
       </div>
-
-      {!apiKey && (
-        <div className="no-api-warning">
-          Insira sua <span>API Key Anthropic</span> no campo superior direito para usar a IA.
-        </div>
-      )}
 
       <div className="farol-grid">
         {PILARES.map((p) => (

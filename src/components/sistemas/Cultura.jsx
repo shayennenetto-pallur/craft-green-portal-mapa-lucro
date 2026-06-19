@@ -12,7 +12,7 @@ const SYSTEM_PROMPT_MANUAL = `Você é um especialista em cultura organizacional
 6) MANIFESTO DA EMPRESA
 Seja inspirador, direto e autêntico.`;
 
-export default function Cultura({ apiKey }) {
+export default function Cultura() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -21,11 +21,9 @@ export default function Cultura({ apiKey }) {
   const [started, setStarted] = useState(false);
 
   const startChat = async () => {
-    if (!apiKey) return alert('Insira sua API Key no campo do header.');
     setLoading(true);
     setStarted(true);
     const firstQuestion = await callClaude(
-      apiKey,
       'Inicie a conversa com uma pergunta para descobrir a cultura da empresa do usuário.',
       SYSTEM_PROMPT_CHAT,
       []
@@ -42,17 +40,16 @@ export default function Cultura({ apiKey }) {
     setInput('');
     setLoading(true);
 
-    const aiReply = await callClaude(apiKey, '', SYSTEM_PROMPT_CHAT, newMessages);
+    const aiReply = await callClaude('', SYSTEM_PROMPT_CHAT, newMessages);
     setMessages([...newMessages, { role: 'assistant', content: aiReply }]);
     setLoading(false);
   };
 
   const generateManual = async () => {
-    if (!apiKey) return alert('Insira sua API Key no campo do header.');
     setGeneratingManual(true);
     const conversation = messages.map((m) => `${m.role === 'user' ? 'Empresa' : 'Consultor'}: ${m.content}`).join('\n\n');
     const prompt = `Com base nesta conversa:\n\n${conversation}\n\nGere o Manual de Cultura completo.`;
-    const result = await callClaude(apiKey, prompt, SYSTEM_PROMPT_MANUAL, []);
+    const result = await callClaude(prompt, SYSTEM_PROMPT_MANUAL, []);
     setManual(result);
     setGeneratingManual(false);
   };
@@ -65,12 +62,6 @@ export default function Cultura({ apiKey }) {
         <p className="system-subtitle">Extraia missão, valores e jeito de ser da sua empresa via chat guiado.</p>
       </div>
 
-      {!apiKey && (
-        <div className="no-api-warning">
-          Insira sua <span>API Key Anthropic</span> no campo superior direito para usar a IA.
-        </div>
-      )}
-
       <div className="card" style={{ maxWidth: 680 }}>
         {!started ? (
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
@@ -78,7 +69,7 @@ export default function Cultura({ apiKey }) {
               A IA vai conduzir uma conversa para descobrir a essência cultural da sua empresa.<br />
               Responda com autenticidade — sem respostas prontas.
             </p>
-            <button className="btn-primary" onClick={startChat} disabled={!apiKey}>
+            <button className="btn-primary" onClick={startChat}>
               Iniciar Conversa com o Consultor
             </button>
           </div>

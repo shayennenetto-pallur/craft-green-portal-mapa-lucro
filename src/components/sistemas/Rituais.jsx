@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { callClaude } from '../../utils/api';
 
-export default function Rituais({ apiKey }) {
+export default function Rituais() {
   const [tab, setTab] = useState('calendario');
   const [form1, setForm1] = useState({ reunioes: '', estrutura: '' });
   const [form2, setForm2] = useState({ transcricao: '' });
@@ -11,7 +11,6 @@ export default function Rituais({ apiKey }) {
   const [loading2, setLoading2] = useState(false);
 
   const handleSubmit1 = async () => {
-    if (!apiKey) return alert('Insira sua API Key no campo do header.');
     setLoading1(true);
     setResult1('');
     const prompt = `Especialista em rituais e gestão de times. Com base nas informações abaixo, gere:
@@ -22,13 +21,12 @@ Prático e direto.
 
 Reuniões atuais: ${form1.reunioes}
 Estrutura do time: ${form1.estrutura}`;
-    const res = await callClaude(apiKey, prompt);
+    const res = await callClaude(prompt);
     setResult1(res);
     setLoading1(false);
   };
 
   const handleSubmit2 = async () => {
-    if (!apiKey) return alert('Insira sua API Key no campo do header.');
     setLoading2(true);
     setResult2('');
     const prompt = `Especialista em gestão de reuniões. Com base na transcrição abaixo, gere:
@@ -38,7 +36,7 @@ Estrutura do time: ${form1.estrutura}`;
 Organizado e objetivo.
 
 Transcrição: ${form2.transcricao}`;
-    const res = await callClaude(apiKey, prompt);
+    const res = await callClaude(prompt);
     setResult2(res);
     setLoading2(false);
   };
@@ -50,12 +48,6 @@ Transcrição: ${form2.transcricao}`;
         <h1 className="system-title">Calendário de Rituais</h1>
         <p className="system-subtitle">Estruture reuniões, gere atas automáticas e pautas para a próxima semana.</p>
       </div>
-
-      {!apiKey && (
-        <div className="no-api-warning">
-          Insira sua <span>API Key Anthropic</span> no campo superior direito para usar a IA.
-        </div>
-      )}
 
       <div className="tabs">
         <button className={`tab-btn${tab === 'calendario' ? ' active' : ''}`} onClick={() => setTab('calendario')}>

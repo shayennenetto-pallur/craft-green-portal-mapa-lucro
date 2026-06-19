@@ -27,37 +27,20 @@ const COMPONENTS = {
 
 export default function Layout() {
   const [active, setActive] = useState('analise-time');
-  const [apiKey, setApiKey] = useState('');
-
   const ActiveComponent = COMPONENTS[active];
 
   return (
     <>
-      {/* HEADER */}
       <header className="header">
         <div className="header-logo-placeholder">
           <img src={logoSvg} alt="Craft Green" className="header-logo" />
         </div>
-
         <div className="header-divider" />
-
         <div className="header-title">
           Mapa do <span>L.U.C.R.O.</span>
         </div>
-
-        <div className="api-key-wrapper">
-          <span className="api-key-label">API Key</span>
-          <input
-            type="password"
-            className="api-key-input"
-            placeholder="sk-ant-..."
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
-          />
-        </div>
       </header>
 
-      {/* SIDEBAR */}
       <aside className="sidebar">
         <nav className="sidebar-nav">
           {NAV_ITEMS.map((item) => (
@@ -78,11 +61,9 @@ export default function Layout() {
         </nav>
       </aside>
 
-      {/* MAIN */}
       <main className="main-content">
-        <ActiveComponent apiKey={apiKey} />
+        <ActiveComponent />
       </main>
-
     </>
   );
 }

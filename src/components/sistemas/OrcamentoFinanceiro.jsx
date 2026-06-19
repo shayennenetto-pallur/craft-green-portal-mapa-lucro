@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { callClaude } from '../../utils/api';
 
-export default function OrcamentoFinanceiro({ apiKey }) {
+export default function OrcamentoFinanceiro() {
   const [form, setForm] = useState({ faturamento: '', fixos: '', variaveis: '', clareza: '', dor: '' });
   const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
@@ -9,7 +9,6 @@ export default function OrcamentoFinanceiro({ apiKey }) {
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async () => {
-    if (!apiKey) return alert('Insira sua API Key no campo do header.');
     setLoading(true);
     setResult('');
     const prompt = `Especialista em gestão financeira para empresas digitais. Linguagem clara e encorajadora. Com base nos dados abaixo, gere:
@@ -27,7 +26,7 @@ Custos variáveis: ${form.variaveis}
 Clareza sobre margem: ${form.clareza}
 Maior dor financeira: ${form.dor}`;
 
-    const res = await callClaude(apiKey, prompt);
+    const res = await callClaude(prompt);
     setResult(res);
     setLoading(false);
   };
@@ -39,12 +38,6 @@ Maior dor financeira: ${form.dor}`;
         <h1 className="system-title">Onboarding Financeiro</h1>
         <p className="system-subtitle">Diagnóstico financeiro completo com DRE, fluxo de caixa e ações imediatas.</p>
       </div>
-
-      {!apiKey && (
-        <div className="no-api-warning">
-          Insira sua <span>API Key Anthropic</span> no campo superior direito para usar a IA.
-        </div>
-      )}
 
       <div className="card" style={{ maxWidth: 640 }}>
         <div className="form-group">

@@ -75,7 +75,7 @@ Exportação
 "Quer que eu gere esse PDI em um arquivo para baixar (PDF, Excel ou Word)?"`;
 }
 
-export default function FeedbackPDI({ colaborador, apiKey }) {
+export default function FeedbackPDI({ colaborador }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -93,7 +93,6 @@ export default function FeedbackPDI({ colaborador, apiKey }) {
     setLoading(true);
     try {
       const reply = await callClaude(
-        apiKey,
         `Inicie a conversa de feedback 1:1 para ${colaborador.nome}.`,
         buildSystemPrompt(colaborador),
         []
@@ -114,7 +113,7 @@ export default function FeedbackPDI({ colaborador, apiKey }) {
     setLoading(true);
 
     try {
-      const reply = await callClaude(apiKey, '', buildSystemPrompt(colaborador), newMessages);
+      const reply = await callClaude('', buildSystemPrompt(colaborador), newMessages);
       setMessages([...newMessages, { role: 'assistant', content: reply }]);
     } catch (e) {
       setMessages([...newMessages, { role: 'assistant', content: `Erro: ${e.message}` }]);
