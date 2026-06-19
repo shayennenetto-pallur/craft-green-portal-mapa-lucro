@@ -189,7 +189,7 @@ export default function AnaliseTime({ apiKey }) {
       )}
 
       {/* BLOCO 1 — FORMULÁRIO */}
-      <div className="card" style={{ marginBottom: 24, borderColor: 'rgba(44,194,149,0.3)', background: '#0f3a36' }}>
+      <div className="card" style={{ marginBottom: 24, borderColor: 'rgba(44,194,149,0.3)', background: '#1a2420' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, marginBottom: 20 }}>
           <div className="form-group" style={{ marginBottom: 0 }}>
             <label className="form-label">Nome</label>
